@@ -1,22 +1,463 @@
 [
     {
-        "Name":"Thời trang nam",
-        "Id": "8273827837",
-        "ChildrendCount": 16,
+        "Name":"Thời Trang Nam",
+        "Id": "11035567",
+        "ChildrenCount": 21,
         "ChildCategories":
-        {
-            
-            "Name":"Áo Hoodie, Áo Len & Áo Nỉ Nè",
-            "Id": "82738278373",
-            "ChildrendCount": 3,
-            "ChildCategories":
+        [
             {
-                "Name":"Áo Len",
-                "Id": "82776738278373",
-                "ChildrendCount": 0
+                "Name":"Áo Khoác",
+                "Id": "11035568",
+                "ChildrenCount": 3,
+                "ChildCategories":
+                [
+                    {
+                        "Name":"Áo Khoác",
+                        "Id": "11035570",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    },
+                    {
+                        "Name":"Áo Khoác Mùa Đông & Áo Choàng",
+                        "Id": "11035569",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    },
+                    {
+                        "Name":"Khác",
+                        "Id": "11035571",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    }
+
+                ]
+            },
+            {
+                
+                "Name":"Áo Vest và Blazer",
+                "Id": "11035572",
+                "ChildrenCount": 5,
+                "ChildCategories":
+                [
+                    {
+                        "Name":"Áo Vest",
+                        "Id": "11035573",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    },
+                    {
+                        "Name":"Bộ Com Lê",
+                        "Id": "11035576",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    },
+                    {
+                        "Name":"Bộ Blazer",
+                        "Id": "11035574",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    },
+                    {
+                        "Name":"Áo Ghi Lê",
+                        "Id": "11035575",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    },
+                    {
+                        "Name":"Khác",
+                        "Id": "11035577",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    }
+                ]
+            },
+            {
+                "Name":"Áo Hoodie, Áo Len & Áo Nỉ",
+                "Id": "11035578",
+                "ChildrenCount": 4,
+                "ChildCategories":
+                [
+                    {
+                        "Name":"Áo Hoodie",
+                        "Id": "11035579",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    },
+                    {
+                        "Name":"Áo Nỉ",
+                        "Id": "11035580",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    },
+                    {
+                        "Name":"Áo Len",
+                        "Id": "11035581",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    },
+                    {
+                        "Name":"Khác",
+                        "Id": "11035582",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    }
+
+                ]
+            },
+            {
+                "Name":"Quần Jeans",
+                "Id": "11035583",
+                "ChildrenCount": 0,
+                "ChildCategories":[]
+            },
+            {
+                "Name":"Quần Dài/Quần Âu",
+                "Id": "11035584",
+                "ChildrenCount": 5,
+                "ChildCategories":
+                [
+                    {
+                        "Name":"Quần Dài",
+                        "Id": "11035588",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    },
+                    {
+                        "Name":"Quần Jogger",
+                        "Id": "11035587",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    },
+                    {
+                        "Name":"Quần Âu",
+                        "Id": "11035585",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    },
+                    {
+                        "Name":"Quần Túi Hộp",
+                        "Id": "11035586",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    },
+                    {
+                        "Name":"Khác",
+                        "Id": "11035589",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    }
+                ]
+            },
+            {
+                "Name":"Quần Short",
+                "Id": "11035590",
+                "ChildrenCount": 1,
+                "ChildCategories":
+                [
+                    {
+                        "Name":"Quần Đùi/Quần Short",
+                        "Id": "11035591",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    }
+                ]
+            },
+            {
+                "Name":"Áo",
+                "Id": "11035592",
+                "ChildrenCount": 4,
+                "ChildCategories":
+                [
+                    {
+                        "Name":"Áo Thun",
+                        "Id": "11035595",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    },
+                    {
+                        "Name":"Áo Sơ Mi",
+                        "Id": "11035593",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    },
+                    {
+                        "Name":"Áo Polo",
+                        "Id": "11035594",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    },
+                    {
+                        "Name":"Khác",
+                        "Id": "11035596",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    }
+                ]
+            },
+            {
+                "Name":"Áo Ba Lỗ",
+                "Id": "11035597",
+                "ChildrenCount": 0,
+                "ChildCategories":[]
+            },
+            {
+                "Name":"Đồ Lót",
+                "Id": "11035598",
+                "ChildrenCount": 4,
+                "ChildCategories":
+                [
+                    {
+                        "Name":"Quần Lót",
+                        "Id": "11035599",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    },
+                    {
+                        "Name":"Đồ Lót Giữ Nhiệt",
+                        "Id": "11035601",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    },
+                    {
+                        "Name":"Khác",
+                        "Id": "11035602",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    },
+                    {
+                        "Name":"Áo Lót",
+                        "Id": "11035600",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    }
+                ]
+            },
+            {
+                "Name":"Đồ Ngủ",
+                "Id": "11035603",
+                "ChildrenCount": 0,
+                "ChildCategories":[]
+            },
+            {
+                "Name":"Đồ Bộ",
+                "Id": "11035604",
+                "ChildrenCount": 0,
+                "ChildCategories":[]
+            },
+            {
+                "Name":"Vớ/Tất",
+                "Id": "11035605",
+                "ChildrenCount": 0,
+                "ChildCategories":[]
+            },
+            {
+                "Name":"Trang Phục Truyền Thống",
+                "Id": "11035606",
+                "ChildrenCount": 4,
+                "ChildCategories":
+                [
+                    {
+                        "Name":"Áo",
+                        "Id": "11035607",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    },
+                    {
+                        "Name":"Bộ",
+                        "Id": "11035609",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    },
+                    {
+                        "Name":"Quần",
+                        "Id": "11035608",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    },
+                    {
+                        "Name":"Khác",
+                        "Id": "11035610",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    }
+                ]
+            },
+            {
+                "Name":"Đồ Hóa Trang",
+                "Id": "11035611",
+                "ChildrenCount": 0,
+                "ChildCategories":[]
+            },
+            {
+                "Name":"Trang Phục Ngành Nghề",
+                "Id": "11035612",
+                "ChildrenCount": 0,
+                "ChildCategories":[]
+            },
+            {
+                "Name":"Khác",
+                "Id": "11035613",
+                "ChildrenCount": 0,
+                "ChildCategories":[]
+            },
+            {
+                "Name":"Trang Sức Nam",
+                "Id": "11035614",
+                "ChildrenCount": 5,
+                "ChildCategories":
+                [
+                    {
+                        "Name":"Nhẫn",
+                        "Id": "11035615",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    },
+                    {
+                        "Name":"Dây chuyền",
+                        "Id": "11035619",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    },
+                    {
+                        "Name":"Vòng tay & Lắc tay",
+                        "Id": "11035617",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    },
+                    {
+                        "Name":"Bông tai",
+                        "Id": "11035616",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    },
+                    {
+                        "Name":"Lắc chân",
+                        "Id": "11035618",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    }
+                ]
+            },
+            {
+                "Name":"Kính Mắt Nam",
+                "Id": "11035620",
+                "ChildrenCount": 4,
+                "ChildCategories":
+                [
+                    {
+                        "Name":"Kính Mát",
+                        "Id": "11035621",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    },
+                    {
+                        "Name":"Gọng Kính",
+                        "Id": "11035622",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    },
+                    {
+                        "Name":"Khác",
+                        "Id": "11035624",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    },
+                    {
+                        "Name":"Hộp Kính Và Phụ Kiện",
+                        "Id": "11035623",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    }
+                ]
+            },
+            {
+                "Name":"Thắt Lưng Nam",
+                "Id": "11035625",
+                "ChildrenCount": 0,
+                "ChildCategories":[]
+            },
+            {
+                "Name":"Cà vạt & Nơ cổ",
+                "Id": "11035626",
+                "ChildrenCount": 0,
+                "ChildCategories":[]
+            },
+            {
+                "Name":"Phụ Kiện Nam",
+                "Id": "11035627",
+                "ChildrenCount": 11,
+                "ChildCategories":
+                [
+                    {
+                        "Name":"Mũ",
+                        "Id": "11035638",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    },
+                    {
+                        "Name":"Găng tay",
+                        "Id": "11035637",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    },
+                    {
+                        "Name":"Mặt Dây Chuyền & Charm",
+                        "Id": "11035630",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    },
+                    {
+                        "Name":"Bộ phụ kiện",
+                        "Id": "11035636",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    },
+                    {
+                        "Name":"Trâm & Pin Cài Áo",
+                        "Id": "11035628",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    },
+                    {
+                        "Name":"Phụ Kiện Khác",
+                        "Id": "11035635",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    },
+                    {
+                        "Name":"Khẩu Trang Thời Trang",
+                        "Id": "11035633",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    },
+                    {
+                        "Name":"Măng Sét Nam",
+                        "Id": "11035631",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    },
+                    {
+                        "Name":"Khăn Tay",
+                        "Id": "11035634",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    },
+                    {
+                        "Name":"Hình Xăm Dán",
+                        "Id": "11035632",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    },
+                    {
+                        "Name":"Miếng Vá Áo",
+                        "Id": "11035629",
+                        "ChildrenCount": 0,
+                        "ChildCategories":[]
+                    }
+                ]
             }
 
-        }
+        ]
     },
     {
         "Name": "Thời trang nữ"
