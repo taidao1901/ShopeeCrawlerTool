@@ -620,7 +620,7 @@
             {
                 "Name": "Áo",
                 "Id": "11035640",
-                "ChildrendCount": 3,
+                "ChildrendCount": 7,
                 "ChildCategories":
                 [
                     {
@@ -629,12 +629,12 @@
                         "ChildrendCount": 0
                     },
                     {
-                        "Name": "Áo sơ mi",
+                        "Name": "Áo thun",
                         "Id": "11035643",
                         "ChildrendCount": 0
                     },
                     {
-                        "Name": "Khác",
+                        "Name": "Áo sơ mi",
                         "Id": "11035644",
                         "ChildrendCount": 0
                     },
@@ -654,18 +654,166 @@
                         "ChildrendCount": 0
                     },
                     {
-                        "Name": "Áo ống",
-                        "Id": "11035642",
-                        "ChildrendCount": 0
-                    },
-                    {
                         "Name": "Áo liền thân",
                         "Id": "11035646",
                         "ChildrendCount": 0
                     }
                 ]
-            }
+            },
+            {
+                "Name": "Đồ bầu",
+                "Id": "11035697",
+                "ChildrendCount": 6,
+                "ChildCategories":
+                [
+                    {
+                        "Name": "Quần bầu, Váy bầu",
+                        "Id": "11035703",
+                        "ChildrendCount": 0
+                    },
+                    {
+                        "Name": "Đầm bầu",
+                        "Id": "11035699",
+                        "ChildrendCount": 0
+                    },
+                    {
+                        "Name": "Bộ đồ bầu",
+                        "Id": "11035702",
+                        "ChildrendCount": 0
+                    },
+                    {
+                        "Name": "Áo ngực cho con bú",
+                        "Id": "11035698",
+                        "ChildrendCount": 0
+                    },
+                    {
+                        "Name": "Áo bầu",
+                        "Id": "11035700",
+                        "ChildrendCount": 0
+                    },
+                    {
+                        "Name": "Khác",
+                        "Id": "11035704",
+                        "ChildrendCount": 0
+                    }
+                ]
+            },
+            {
+                "Name": "Đồ truyền thống",
+                "Id": "11035705",
+                "ChildrendCount": 5,
+                "ChildCategories":
+                [
+                    {
+                        "Name": "Quần và chân váy",
+                        "Id": "11035707",
+                        "ChildrendCount": 0
+                    },
+                    {
+                        "Name": "Đầm",
+                        "Id": "11035709",
+                        "ChildrendCount": 0
+                    },
+                    {
+                        "Name": "Bộ",
+                        "Id": "11035708",
+                        "ChildrendCount": 0
+                    },
+                    {
+                        "Name": "Áo",
+                        "Id": "11035706",
+                        "ChildrendCount": 0
+                    },
+                    {
+                        "Name": "Khác",
+                        "Id": "11035710",
+                        "ChildrendCount": 0
+                    }
+                ]
+            },
+            {
+                "Name": "Đồ hóa trang",
+                "Id": "11035711",
+                "ChildrendCount": 0,
+                "ChildCategories":[]
+            },
+            {
+                "Name": "Vải",
+                "Id": "11035713",
+                "ChildrendCount": 9,
+                "ChildCategories":
+                [
+                    {
+                        "Name": "Vải nhung, lụa, satin",
+                        "Id": "11035718",
+                        "ChildrendCount": 0
 
+                    },
+                    {
+                        "Name": "Khác",
+                        "Id": "11035725",
+                        "ChildrendCount": 0
+                    },
+                    {
+                        "Name": "Vải len",
+                        "Id": "11035717",
+                        "ChildrendCount": 0
+                    },
+                    {
+                        "Name": "Vải cotton",
+                        "Id": "11035716",
+                        "ChildrendCount": 0
+                    },
+                    {
+                        "Name": "Vải canvas",
+                        "Id": "11035722",
+                        "ChildrendCount": 0
+                    },
+                    {
+                        "Name": "Vải da",
+                        "Id": "11035719",
+                        "ChildrendCount": 0
+                    },
+                    {
+                        "Name": "Vải denim/Vải bò",
+                        "Id": "11035721",
+                        "ChildrendCount": 0
+                    },
+                    {
+                        "Name": "Vải nylon",
+                        "Id": "11035720",
+                        "ChildrendCount": 0
+                    },
+                    {
+                        "Name": "Vải da",
+                        "Id": "11035719",
+                        "ChildrendCount": 0
+                    }
+                ]
+            },
+            {
+                "Name": "Vớ/Tất",
+                "Id": "11035726",
+                "ChildrendCount": 3,
+                "ChildCategories":
+                [
+                    {
+                        "Name": "Tất",
+                        "Id": "11035727",
+                        "ChildrendCount": 0
+                    },
+                    {
+                        "Name": "Quần tất",
+                        "Id": "11035728",
+                        "ChildrendCount": 0
+                    },
+                    {
+                        "Name": "Khác",
+                        "Id": "11035729",
+                        "ChildrendCount": 0
+                    }
+                ]
+            }
         ]
     }
 ]
