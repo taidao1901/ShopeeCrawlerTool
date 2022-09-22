@@ -4,21 +4,32 @@
         "Id": "8273827837",
         "ChildrendCount": 16,
         "ChildCategories":
-        {
-            
-            "Name":"Áo Hoodie, Áo Len & Áo Nỉ",
-            "Id": "82738278373",
-            "ChildrendCount": 3,
-            "ChildCategories":
+        [
+            { 
+                "Name":"Áo Hoodie, Áo Len & Áo Nỉ",
+                "Id": "82738278373",
+                "ChildrendCount": 3,
+                "ChildCategories":
+                {
+                    "Name":"Áo Len",
+                    "Id": "82776738278373",
+                    "ChildrendCount": 0
+                }
+            },
             {
-                "Name":"Áo Len",
-                "Id": "82776738278373",
-                "ChildrendCount": 0
+                
             }
 
-        }
+        ]
     },
     {
-        "Name": "Thời trang nữ"
+        "Name": "Thời trang nữ",
+        "Id": "11035639",
+        "ChildrendCount": 21,
+        "ChildCategories":
+        {
+            
+        }
+
     }
 ]
