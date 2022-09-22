@@ -629,13 +629,38 @@
                         "ChildrendCount": 0
                     },
                     {
-                        "Name": "Đồ bộ gia đình",
-                        "Id": "11035679",
+                        "Name": "Áo sơ mi",
+                        "Id": "11035643",
                         "ChildrendCount": 0
                     },
                     {
                         "Name": "Khác",
-                        "Id": "11035681",
+                        "Id": "11035644",
+                        "ChildrendCount": 0
+                    },
+                    {
+                        "Name": "Khác",
+                        "Id": "11035647",
+                        "ChildrendCount": 0
+                    },
+                    {
+                        "Name": "Áo polo",
+                        "Id": "11035645",
+                        "ChildrendCount": 0
+                    },
+                    {
+                        "Name": "Áo ống",
+                        "Id": "11035642",
+                        "ChildrendCount": 0
+                    },
+                    {
+                        "Name": "Áo ống",
+                        "Id": "11035642",
+                        "ChildrendCount": 0
+                    },
+                    {
+                        "Name": "Áo liền thân",
+                        "Id": "11035646",
                         "ChildrendCount": 0
                     }
                 ]
