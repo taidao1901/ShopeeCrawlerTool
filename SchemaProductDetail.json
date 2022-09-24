@@ -2,8 +2,8 @@
     "ItemId":"",
     "ShopId":"",
     "Name":"",
-    "Category":"",
-    "CateId":"",
+    "CustomerCategoryId":"",
+    "SellerCategotyId":"",
     "ProductURL": "",
     "Images":[
         "https://cf.shopee/file/{}"
