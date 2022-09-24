@@ -1,0 +1,15 @@
+{
+    "ItemId":"",
+    "ShopId":"",
+    "Name":"",
+    "LabelIds":[
+        "optional"
+    ],
+    "Category":"",
+    "CateId":"",
+    "ProductURL": "",
+    "Images":[
+        "https://cf.shopee/file/{}"
+    ],
+    "Description":"optional"
+}
