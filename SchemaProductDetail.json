@@ -2,14 +2,17 @@
     "ItemId":"",
     "ShopId":"",
     "Name":"",
-    "LabelIds":[
-        "optional"
-    ],
     "Category":"",
     "CateId":"",
     "ProductURL": "",
     "Images":[
         "https://cf.shopee/file/{}"
     ],
-    "Description":"optional"
+    "IsOfficialShop": 1,
+    "Description":"optional",
+    "Brand": "optional",
+    "Price": "optional",
+    "LabelIds":[
+        "optional"
+    ]
 }
