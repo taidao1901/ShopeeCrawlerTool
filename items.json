@@ -203,15 +203,7 @@
                     "version": 2,
                     "vid": "sg_2fe53fba-1a64-4237-a18a-68056f6e3b21_000060",
                     "formats": [],
-                    "default_format": {
-                        "format": 600001,
-                        "defn": "ORI",
-                        "profile": "MP4",
-                        "path": "",
-                        "url": "http://play-ws.vod.shopee.com/c3/98934353/107/YzQsMTkwLTQ1NTM1LDE0MzAxNjMyMTQxMzIwNjAxNjAsMg.mp4",
-                        "width": 1280,
-                        "height": 1280
-                    }
+                    "default_format": null
                 }
             ],
             "tier_variations": [
@@ -922,17 +914,17 @@
                 "515dccdab2b606881dcde4c6df26e2dc"
             ],
             "currency": "VND",
-            "stock": 37715,
+            "stock": 37712,
             "status": 1,
             "ctime": 1608877472,
             "sold": 12337,
-            "historical_sold": 64720,
+            "historical_sold": 64734,
             "liked": false,
             "liked_count": 5308,
             "view_count": null,
             "catid": 100017,
             "brand": "None",
-            "cmt_count": 6603,
+            "cmt_count": 6604,
             "flag": 2,
             "cb_option": 0,
             "item_status": "normal",
@@ -957,7 +949,15 @@
                     "version": 2,
                     "vid": "sg_249e24fd-eb0c-4bc7-8de2-c48565033290_000060",
                     "formats": [],
-                    "default_format": null
+                    "default_format": {
+                        "format": 600001,
+                        "defn": "ORI",
+                        "profile": "MP4",
+                        "path": "",
+                        "url": "http://play-aka.vod.shopee.com/c3/98934353/107/YzQsMTg1LTQ1NTMwLDE0MzAxNTI2NTY2MTc2ODA4OTYsMg.mp4",
+                        "width": 1280,
+                        "height": 1280
+                    }
                 }
             ],
             "tier_variations": [
@@ -1072,14 +1072,14 @@
                 }
             ],
             "item_rating": {
-                "rating_star": 4.969090909090909,
+                "rating_star": 4.969095591577034,
                 "rating_count": [
-                    6603,
+                    6604,
                     4,
                     5,
                     30,
                     113,
-                    6451
+                    6452
                 ],
                 "rcount_with_context": 3259,
                 "rcount_with_image": 3079
@@ -1349,13 +1349,13 @@
             "status": 1,
             "ctime": 1544550519,
             "sold": 3844,
-            "historical_sold": 43762,
+            "historical_sold": 43767,
             "liked": false,
             "liked_count": 1572,
             "view_count": null,
             "catid": 100017,
             "brand": "No Brand",
-            "cmt_count": 5017,
+            "cmt_count": 5018,
             "flag": 2,
             "cb_option": 0,
             "item_status": "normal",
@@ -1503,14 +1503,14 @@
                 }
             ],
             "item_rating": {
-                "rating_star": 4.960534183775165,
+                "rating_star": 4.9605420486249505,
                 "rating_count": [
-                    5017,
+                    5018,
                     6,
                     7,
                     25,
                     103,
-                    4876
+                    4877
                 ],
                 "rcount_with_context": 2705,
                 "rcount_with_image": 2542
@@ -2722,7 +2722,7 @@
             "sold": 1205,
             "historical_sold": 21137,
             "liked": false,
-            "liked_count": 707,
+            "liked_count": 706,
             "view_count": null,
             "catid": 100017,
             "brand": "",
@@ -4249,7 +4249,7 @@
                         "defn": "ORI",
                         "profile": "MP4",
                         "path": "",
-                        "url": "http://play-aka.vod.shopee.com/c3/98934353/107/YzQsMTkzLTQ1NTM4LDE0MzAxNjY1NjU1NzE0NzM0MDgsMg.mp4",
+                        "url": "http://play-ws.vod.shopee.com/c3/98934353/107/YzQsMTkzLTQ1NTM4LDE0MzAxNjY1NjU1NzE0NzM0MDgsMg.mp4",
                         "width": 1280,
                         "height": 1280
                     }
@@ -5246,13 +5246,13 @@
                 "e202c1558b31b99f3e60ca07d073c218"
             ],
             "currency": "VND",
-            "stock": 94328,
+            "stock": 94327,
             "status": 1,
             "ctime": 1572516170,
             "sold": 11896,
-            "historical_sold": 48160,
+            "historical_sold": 48167,
             "liked": false,
-            "liked_count": 2633,
+            "liked_count": 2634,
             "view_count": null,
             "catid": 100017,
             "brand": "No Brand",
@@ -5793,14 +5793,14 @@
                 }
             ],
             "item_rating": {
-                "rating_star": 4.857387825092884,
+                "rating_star": 4.857428571428572,
                 "rating_count": [
-                    3499,
+                    3500,
                     45,
                     17,
                     64,
                     140,
-                    3233
+                    3234
                 ],
                 "rcount_with_context": 2269,
                 "rcount_with_image": 2087
@@ -6077,13 +6077,13 @@
             "status": 1,
             "ctime": 1519468767,
             "sold": 1557,
-            "historical_sold": 21157,
+            "historical_sold": 21166,
             "liked": false,
             "liked_count": 635,
             "view_count": null,
             "catid": 100017,
             "brand": "No Brand",
-            "cmt_count": 2431,
+            "cmt_count": 2432,
             "flag": 2,
             "cb_option": 0,
             "item_status": "normal",
@@ -6213,14 +6213,14 @@
                 }
             ],
             "item_rating": {
-                "rating_star": 4.9843685726038665,
+                "rating_star": 4.984375,
                 "rating_count": [
-                    2431,
+                    2432,
                     1,
                     1,
                     5,
                     21,
-                    2403
+                    2404
                 ],
                 "rcount_with_context": 1115,
                 "rcount_with_image": 1074
@@ -6526,15 +6526,7 @@
                     "version": 2,
                     "vid": "sg_bf85ebfa-7240-4f9f-8ee8-c4e37ccbea64_000060",
                     "formats": [],
-                    "default_format": {
-                        "format": 600001,
-                        "defn": "ORI",
-                        "profile": "MP4",
-                        "path": "",
-                        "url": "http://play-aka.vod.shopee.com/c3/98934353/107/YzQsMTk0LTQ1NTM5LDE0MzAxNjg1NTY0MjMwMzI4MzIsMg.mp4",
-                        "width": 1280,
-                        "height": 1280
-                    }
+                    "default_format": null
                 }
             ],
             "tier_variations": [
@@ -6934,7 +6926,15 @@
                     "version": 2,
                     "vid": "sg_7bb71f89-becb-422e-a365-353869d2fa85_000060",
                     "formats": [],
-                    "default_format": null
+                    "default_format": {
+                        "format": 600001,
+                        "defn": "ORI",
+                        "profile": "MP4",
+                        "path": "",
+                        "url": "http://play-ws.vod.shopee.com/c3/98934353/107/YzQsMjAxLTQ1NTQ2LDE0MzAxODAyODIwODA0MzYyMjQsMg.mp4",
+                        "width": 1280,
+                        "height": 1280
+                    }
                 }
             ],
             "tier_variations": [
@@ -7277,7 +7277,7 @@
                         "defn": "ORI",
                         "profile": "MP4",
                         "path": "",
-                        "url": "http://play-aka.vod.shopee.com/c3/98934353/107/YzQsMTkzLTQ1NTM4LDE0MzAxNjY1NjU1NzE0NzM0MDgsMg.mp4",
+                        "url": "http://play-ws.vod.shopee.com/c3/98934353/107/YzQsMTkzLTQ1NTM4LDE0MzAxNjY1NjU1NzE0NzM0MDgsMg.mp4",
                         "width": 1280,
                         "height": 1280
                     }
@@ -8466,7 +8466,7 @@
             "status": 1,
             "ctime": 1621160353,
             "sold": 5043,
-            "historical_sold": 33190,
+            "historical_sold": 33195,
             "liked": false,
             "liked_count": 1155,
             "view_count": null,
@@ -8900,15 +8900,7 @@
                     "version": 2,
                     "vid": "sg_0d2d2415-711c-48fd-a3a0-b0d87c3f22c4_000060",
                     "formats": [],
-                    "default_format": {
-                        "format": 600001,
-                        "defn": "ORI",
-                        "profile": "MP4",
-                        "path": "",
-                        "url": "http://play-aka.vod.shopee.com/c3/98934353/107/YzQsMTk2LTQ1NTQxLDE0MzAxNzI5NTM2NjY2NTgzMDQsMg.mp4",
-                        "width": 1280,
-                        "height": 1280
-                    }
+                    "default_format": null
                 }
             ],
             "tier_variations": [
@@ -11233,7 +11225,7 @@
                         "defn": "ORI",
                         "profile": "MP4",
                         "path": "",
-                        "url": "http://play-aka.vod.shopee.com/c3/98934353/107/YzQsMTg3LTQ1NTMyLDE0MzAxNjIwMDcwNDQ5MjMzOTIsMg.mp4",
+                        "url": "http://play-ws.vod.shopee.com/c3/98934353/107/YzQsMTg3LTQ1NTMyLDE0MzAxNjIwMDcwNDQ5MjMzOTIsMg.mp4",
                         "width": 1280,
                         "height": 1280
                     }
@@ -11573,7 +11565,7 @@
                 "f8e6ce5fb9ed7e111f40fe752f47d436"
             ],
             "currency": "VND",
-            "stock": 28667,
+            "stock": 28665,
             "status": 1,
             "ctime": 1621173706,
             "sold": 1432,
@@ -11632,7 +11624,7 @@
                         "defn": "ORI",
                         "profile": "MP4",
                         "path": "",
-                        "url": "http://play-aka.vod.shopee.com/c3/98934353/105/AnoylbUASP6bm=4hsAEOAEY.mp4",
+                        "url": "http://play-ws.vod.shopee.com/c3/98934353/105/AnoylbUASP6bm=4hsAEOAEY.mp4",
                         "width": 480,
                         "height": 854
                     }
@@ -12083,8 +12075,44 @@
                     "duration": 15,
                     "version": 2,
                     "vid": "sg_5cd65a49-2bcd-48c7-8a16-9389a3c337ae_000092",
-                    "formats": [],
-                    "default_format": null
+                    "formats": [
+                        {
+                            "format": 1600003,
+                            "defn": "V480P",
+                            "profile": "MP4",
+                            "path": "c3/98934353/107/AmM1IqIACFoqIPchXgEP=95G.mp4",
+                            "url": "",
+                            "width": 480,
+                            "height": 852
+                        },
+                        {
+                            "format": 1600010,
+                            "defn": "V540P",
+                            "profile": "MP4",
+                            "path": "c3/98934353/107/AmM1f0QAAIsqIPchXgEG=95G.mp4",
+                            "url": "",
+                            "width": 540,
+                            "height": 960
+                        },
+                        {
+                            "format": 1600008,
+                            "defn": "V720P",
+                            "profile": "MP4",
+                            "path": "c3/98934353/107/AmM1f2QAeI8qIPchXgEL=95G.mp4",
+                            "url": "",
+                            "width": 720,
+                            "height": 1280
+                        }
+                    ],
+                    "default_format": {
+                        "format": 600001,
+                        "defn": "ORI",
+                        "profile": "MP4",
+                        "path": "",
+                        "url": "http://play-ws.vod.shopee.com/c3/98934353/107/AmM1UuQA7I8qIPchXgEQ=95G.mp4",
+                        "width": 720,
+                        "height": 1280
+                    }
                 }
             ],
             "tier_variations": [
@@ -12400,7 +12428,7 @@
                 "b9e5fd23b4ac3cb1f6871a2baec630c4"
             ],
             "currency": "VND",
-            "stock": 35539,
+            "stock": 35535,
             "status": 1,
             "ctime": 1588167299,
             "sold": 4278,
@@ -12813,15 +12841,7 @@
                     "version": 2,
                     "vid": "sg_65b9da84-820a-4153-a5af-c17f63d37122_000060",
                     "formats": [],
-                    "default_format": {
-                        "format": 600001,
-                        "defn": "ORI",
-                        "profile": "MP4",
-                        "path": "",
-                        "url": "http://play-ws.vod.shopee.com/c3/98934353/107/YzQsMjAzLTQ1NTc3LDE0MzAyMzQ0MzUwNzA3MzAyNDAsMg.mp4",
-                        "width": 1280,
-                        "height": 1280
-                    }
+                    "default_format": null
                 }
             ],
             "tier_variations": [
@@ -13175,7 +13195,7 @@
             "view_count": null,
             "catid": 100017,
             "brand": "",
-            "cmt_count": 3254,
+            "cmt_count": 3255,
             "flag": 65538,
             "cb_option": 0,
             "item_status": "normal",
@@ -13199,8 +13219,26 @@
                     "duration": 17,
                     "version": 2,
                     "vid": "sg_61d3ff53-bd1e-4bf7-9b7a-bcbdfa7e5fdd_000070",
-                    "formats": [],
-                    "default_format": null
+                    "formats": [
+                        {
+                            "format": 660011,
+                            "defn": "V720P",
+                            "profile": "MP4",
+                            "path": "c3/98934353/105/YzQsMjQ3LTQ5NjI2LDE0NDUwNDAzNDc2MTgyMzg0NjQsMw.mp4",
+                            "url": "",
+                            "width": 1080,
+                            "height": 1080
+                        }
+                    ],
+                    "default_format": {
+                        "format": 600001,
+                        "defn": "ORI",
+                        "profile": "MP4",
+                        "path": "",
+                        "url": "http://play-aka.vod.shopee.com/c3/98934353/105/YzQsMjQ3LTQ5NjI2LDE0NDUwNDAzMzc1NjAyOTc0NzIsMg.mp4",
+                        "width": 1200,
+                        "height": 1200
+                    }
                 }
             ],
             "tier_variations": [
@@ -13311,17 +13349,17 @@
                 }
             ],
             "item_rating": {
-                "rating_star": 4.970479704797048,
+                "rating_star": 4.970488779588073,
                 "rating_count": [
-                    3254,
+                    3255,
                     1,
                     1,
                     14,
                     61,
-                    3177
+                    3178
                 ],
-                "rcount_with_context": 1975,
-                "rcount_with_image": 1894
+                "rcount_with_context": 1976,
+                "rcount_with_image": 1895
             },
             "item_type": 0,
             "reference_item_id": "",
@@ -14252,7 +14290,7 @@
                 "5213f935a4d2b4e7092c7bd6f7d58f84"
             ],
             "currency": "VND",
-            "stock": 5838,
+            "stock": 5844,
             "status": 1,
             "ctime": 1622535879,
             "sold": 2238,
@@ -16032,7 +16070,7 @@
             "view_count": null,
             "catid": 100017,
             "brand": "No Brand",
-            "cmt_count": 820,
+            "cmt_count": 821,
             "flag": 2,
             "cb_option": 0,
             "item_status": "normal",
@@ -16134,14 +16172,14 @@
                 }
             ],
             "item_rating": {
-                "rating_star": 4.971951219512195,
+                "rating_star": 4.971985383678441,
                 "rating_count": [
-                    820,
+                    821,
                     1,
                     0,
                     5,
                     9,
-                    805
+                    806
                 ],
                 "rcount_with_context": 282,
                 "rcount_with_image": 269
@@ -16958,7 +16996,7 @@
             "view_count": null,
             "catid": 100017,
             "brand": "",
-            "cmt_count": 1375,
+            "cmt_count": 1376,
             "flag": 2,
             "cb_option": 0,
             "item_status": "normal",
@@ -17082,17 +17120,17 @@
                 }
             ],
             "item_rating": {
-                "rating_star": 4.9898181818181815,
+                "rating_star": 4.9898255813953485,
                 "rating_count": [
-                    1375,
+                    1376,
                     0,
                     0,
                     2,
                     10,
-                    1363
+                    1364
                 ],
-                "rcount_with_context": 678,
-                "rcount_with_image": 659
+                "rcount_with_context": 679,
+                "rcount_with_image": 660
             },
             "item_type": 0,
             "reference_item_id": "",
@@ -17341,7 +17379,7 @@
             "view_count": null,
             "catid": 100017,
             "brand": "No Brand",
-            "cmt_count": 545,
+            "cmt_count": 546,
             "flag": 2,
             "cb_option": 0,
             "item_status": "normal",
@@ -17425,14 +17463,14 @@
                 }
             ],
             "item_rating": {
-                "rating_star": 4.9743119266055045,
+                "rating_star": 4.9743589743589745,
                 "rating_count": [
-                    545,
+                    546,
                     1,
                     0,
                     1,
                     8,
-                    535
+                    536
                 ],
                 "rcount_with_context": 224,
                 "rcount_with_image": 206
@@ -21189,7 +21227,7 @@
                         "defn": "ORI",
                         "profile": "MP4",
                         "path": "",
-                        "url": "http://play-aka.vod.shopee.com/c4/98934353/10521071215/YzQsMTQxLTM4NDcxLDE0MTQ0OTI1NjY1ODk3NzE3NzYsMg.mp4",
+                        "url": "http://play-ws.vod.shopee.com/c4/98934353/10521071215/YzQsMTQxLTM4NDcxLDE0MTQ0OTI1NjY1ODk3NzE3NzYsMg.mp4",
                         "width": 720,
                         "height": 720
                     }
