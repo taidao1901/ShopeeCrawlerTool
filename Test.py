@@ -5,24 +5,30 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 import time
 from datetime import datetime
-
-def GetResponse(url: str, page: int) -> dict:
-    def process_browser_log_entry(entry):
-        response = json.loads(entry['message'])['message']
-        return response
-    items=[]
+import concurrent.futures
+def CreateService():
     service = Service(executable_path=ChromeDriverManager().install())
     caps = DesiredCapabilities.CHROME   
     caps['goog:loggingPrefs'] = {'performance': 'ALL'}
     driver = webdriver.Chrome(desired_capabilities=caps,service = service)
+    return driver
+
+def GetItems(url:str, page: int) -> dict:
+    
+    def process_browser_log_entry(entry):
+        response = json.loads(entry['message'])['message']
+        return response
+    items=[]
+    driver = CreateService()
     try:
         driver.get(f"{url}?page={page}")
         time.sleep(10)
         browser_log = driver.get_log('performance') 
         events = [process_browser_log_entry(entry) for entry in browser_log]
         events = [event for event in events if 'Network.response' in event['method']]
-    except:
+    except Exception() as e:
         print("Không vào được links")
+        print(e)
         return items
     for i in range(len(events)):
         try:
@@ -31,8 +37,9 @@ def GetResponse(url: str, page: int) -> dict:
                 items = (json.loads(response['body'])["items"])
         except:
             pass
+    driver.execute_script("window.stop();")
     return items
-def GetProductsDetails(items,customerCategoryId):
+def GetProductsDetails(items: list,customerCategoryId: str) -> list:
     result = []
     for item in items:
         try:
@@ -58,10 +65,20 @@ def GetProductsDetails(items,customerCategoryId):
             # logger.error(e)
             pass
     return result
+def CrawlByCategory(url,customerCategoryId, pageQuantity: int, maxWorkers=2) -> list:
+    futures =[]
+    items = []
+    with concurrent.futures.ThreadPoolExecutor(max_workers= maxWorkers) as executor:
+        for page in range(pageQuantity):
+            futures.append(executor.submit(GetItems,url,page))
 
-items= GetResponse("https://shopee.vn/Vải-len-cat.11035639.11035713.11035717", 0)
-result = GetProductsDetails(items, "11035717")
-with open('items.json', 'w', encoding='utf-8') as f:
-    json.dump(items, f, ensure_ascii=False, indent=4)
-with open('result.json', 'w', encoding='utf-8') as f:
+    for future in concurrent.futures.as_completed(futures):
+        items.extend(future.result())
+    
+    result = GetProductsDetails(items, customerCategoryId)
+    return result
+
+result = CrawlByCategory("https://shopee.vn/%C3%81o-Kho%C3%A1c-cat.11035567.11035568", '11035568', 8)
+
+with open('data.json', 'w', encoding='utf-8') as f:
     json.dump(result, f, ensure_ascii=False, indent=4)
