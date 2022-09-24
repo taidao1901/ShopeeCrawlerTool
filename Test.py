@@ -19,14 +19,18 @@ def GetResponse(url: str, page: int) -> dict:
         driver.get(f"{url}?page={page}")
         time.sleep(10)
         browser_log = driver.get_log('performance') 
+        # print(browser_log)
         events = [process_browser_log_entry(entry) for entry in browser_log]
+        # print(events)
         events = [event for event in events if 'Network.response' in event['method']]
+        # print(events)
     except:
         print("Không vào được links")
         return items
     for i in range(len(events)):
         try:
             if  "https://shopee.vn/api/v4/search/search_items?by=relevancy" in events[i]["params"]["response"]["url"]:
+                # print(events[i])
                 response = driver.execute_cdp_cmd('Network.getResponseBody', {'requestId': events[i]["params"]["requestId"]})
                 items = (json.loads(response['body'])["items"])
         except:
