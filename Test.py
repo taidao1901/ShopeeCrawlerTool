@@ -16,6 +16,7 @@ from selenium_stealth import stealth
 import undetected_chromedriver as uc
 from selenium.webdriver.common.proxy import Proxy, ProxyType
 # from seleniumwire import webdriver
+from HelpTools.ReadCategories import Categories
 
 def CheckExistsByXpath(driver, xpath):
     try:
@@ -110,7 +111,6 @@ def GetItems(url:str, page: int) -> dict:
             if  "https://shopee.vn/api/v4/search/search_items?by=relevancy" in events[i]["params"]["response"]["url"]:
                 response = driver.execute_cdp_cmd('Network.getResponseBody', {'requestId': events[i]["params"]["requestId"]})
                 items = (json.loads(response['body'])["items"])
-                print(items)
         except:
             pass
     driver.execute_script("window.stop();")
@@ -118,38 +118,40 @@ def GetItems(url:str, page: int) -> dict:
 
 def GetProductsDetails(items: list,customerCategoryId: str) -> list:
     result = []
-    for item in items:
-        try:
-            item =item["item_basic"]
-            result.append(
-                {
-                    'ItemId': item['itemid'],
-                    "ShopId": item["shopid"],
-                    'Name': item['name'],
-                    'Images': [f"https://cf.shopee.vn/file/{image}" for image in item['images']],
-                    'ProductURL': f"https://shopee.vn/{item['name']}-i.{item['shopid']}.{item['itemid']}",
-                    'CustomerCategoryId':customerCategoryId,
-                    "SellerId":  item['catid'],
-                    'LabelIds': item['label_ids'],
-                    'Brand': item['brand'],
-                    'Price': item['price'] if item['raw_discount'] == 0 else item['price_before_discount'],
-                    'IsOfficialShop': item['is_official_shop'],
-                    'FetchedTime': datetime.timestamp(datetime.utcnow()),
-                    'Description':''
-                }
-            )
-        except Exception as e:
-            # logger.error(e)
-            pass
+    if items is not None:
+        for item in items:
+            try:
+                item =item["item_basic"]
+                productSlug = item['name'].replace(" ","-")
+                result.append(
+                    {
+                        'ItemId': item['itemid'],
+                        "ShopId": item["shopid"],
+                        'Name': item['name'],
+                        'Images': [f"https://cf.shopee.vn/file/{image}" for image in item['images']],
+                        'ProductURL': f"https://shopee.vn/{productSlug}-i.{item['shopid']}.{item['itemid']}",
+                        'CustomerCategoryId':customerCategoryId,
+                        "SellerId":  item['catid'],
+                        'LabelIds': item['label_ids'],
+                        'Brand': item['brand'],
+                        'Price': item['price'] if item['raw_discount'] == 0 else item['price_before_discount'],
+                        'IsOfficialShop': item['is_official_shop'],
+                        'FetchedTime': datetime.timestamp(datetime.utcnow()),
+                        # 'Description':''
+                    }
+                )
+            except Exception as e:
+                # logger.error(e)
+                pass
     return result
 
-def CrawlByCategory(url, customerCategoryId, pageQuantity: int, maxWorkers=2) -> list:
+def CrawlByCategory(url, pageQuantity: int, maxWorkers=8) -> list:
     futures =[]
     items = []
     with concurrent.futures.ThreadPoolExecutor(max_workers= maxWorkers) as executor:
         for page in range(pageQuantity):
             futures.append(executor.submit(GetItems,url,page))
-
+    customerCategoryId = url.split(".")[-1]
     for future in concurrent.futures.as_completed(futures):
         items.extend(future.result())
     
@@ -159,5 +161,9 @@ def CrawlByCategory(url, customerCategoryId, pageQuantity: int, maxWorkers=2) ->
 if __name__=="__main__":
     # https://httpbin.org/ip
     result = CrawlByCategory("https://httpbin.org/ip", '11035568', 1)
+    categories = Categories("Categories.json")
+    allPaths =categories.GetAllPaths()
+    
+    result = CrawlByCategory(allPaths[0], 8)
     with open('data.json', 'w', encoding='utf-8') as f:
         json.dump(result, f, ensure_ascii=False, indent=4)
