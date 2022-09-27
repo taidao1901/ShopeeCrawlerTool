@@ -15,6 +15,7 @@ from random_user_agent.params import SoftwareName, OperatingSystem
 from selenium_stealth import stealth
 import undetected_chromedriver as uc
 from selenium.webdriver.common.proxy import Proxy, ProxyType
+# from seleniumwire import webdriver
 
 def CheckExistsByXpath(driver, xpath):
     try:
@@ -32,7 +33,7 @@ def CreateService():
     operatingSystems = [OperatingSystem.WINDOWS.value, OperatingSystem.LINUX.value]
     userAgentRotator = UserAgent(software_names=softwareNames, operating_systems=operatingSystems, limit=100)
     userAgent = userAgentRotator.get_random_user_agent()
-    Options
+    # Options
     chromeOptions = Options()
     chromeOptions.add_argument(f'user-agent={userAgent}')
     chromeOptions.add_argument('--disable-blink-features=AutomationControlled')
@@ -41,25 +42,28 @@ def CreateService():
     chromeOptions.add_argument('--disable-notifications')
     chromeOptions.add_experimental_option("excludeSwitches", ["enable-automation"])
     chromeOptions.add_experimental_option('useAutomationExtension', False)
+    # # Selenium wire (Du phong)
+    # hostname = "171.240.154.234"
+    # port = "4007"
+    # user = "XmkFifOG"
+    # passw = "VNjYCQHl"
+    # options = {
+    # 'proxy': {
+    #     'http': f'http://{user}:{passw}@{hostname}:{port}', 
+    #     'https': f'https://{user}:{passw}@{hostname}:{port}',
+    #     'no_proxy': 'localhost,127.0.0.1' # excludes
+    #     }
+    # }
     # Proxy
-    # PROXY = "116.109.77.129:9009"
-    # prox = Proxy()
-    # prox.proxy_type = ProxyType.MANUAL
-    # prox.auto_detect = False
-    # prox.http_proxy = PROXY
-    # prox.ssl_proxy = PROXY
-    # prox.add_to_capabilities(caps)
+    PROXY = "171.240.154.234:4007"
+    prox = Proxy()
+    prox.proxy_type = ProxyType.MANUAL
+    prox.auto_detect = False
+    prox.http_proxy = PROXY
+    prox.ssl_proxy = PROXY
+    prox.add_to_capabilities(caps)
+    # driver = webdriver.Chrome(desired_capabilities=caps,service = service, options=chromeOptions, seleniumwire_options=options)
     driver = webdriver.Chrome(desired_capabilities=caps,service = service, options=chromeOptions)
-    # Bypass captcha
-    # stealth(driver,
-    #     languages=["en-US", "en"],
-    #     vendor="Google Inc.",
-    #     platform="Win32",
-    #     webgl_vendor="Intel Inc.",
-    #     renderer="Intel Iris OpenGL Engine",
-    #     fix_hairline=True,
-    #     )
-    # driver = uc.Chrome(options=chromeOptions)
     return driver
 
 def GetItems(url:str, page: int) -> dict:
@@ -153,6 +157,7 @@ def CrawlByCategory(url, customerCategoryId, pageQuantity: int, maxWorkers=2) ->
     return result
 
 if __name__=="__main__":
-    result = CrawlByCategory("https://shopee.vn/%C3%81o-Kho%C3%A1c-cat.11035567.11035568", '11035568', 4)
+    # https://httpbin.org/ip
+    result = CrawlByCategory("https://httpbin.org/ip", '11035568', 1)
     with open('data.json', 'w', encoding='utf-8') as f:
         json.dump(result, f, ensure_ascii=False, indent=4)
