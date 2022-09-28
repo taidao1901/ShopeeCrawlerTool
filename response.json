@@ -1,0 +1,106 @@
+{
+    "method": "Network.responseReceived",
+    "params": {
+        "frameId": "E9A9A68A5BC82439A1AAEFB727B526C6",
+        "hasExtraInfo": true,
+        "loaderId": "537874C049B83FC7D37B17B17C495A78",
+        "requestId": "23700.107",
+        "response": {
+            "connectionId": 34,
+            "connectionReused": true,
+            "encodedDataLength": 807,
+            "fromDiskCache": false,
+            "fromPrefetchCache": false,
+            "fromServiceWorker": false,
+            "headers": {
+                "content-encoding": "gzip",
+                "content-type": "application/json",
+                "date": "Wed, 28 Sep 2022 14:02:32 GMT",
+                "server": "SGW",
+                "vary": "Accept-Encoding",
+                "x-request-id": "1f8a1b84e9bd3642e4350eff5a503d00:000000dd6606faeb:0000000000000000"
+            },
+            "mimeType": "application/json",
+            "protocol": "h2",
+            "remoteIPAddress": "143.92.75.65",
+            "remotePort": 443,
+            "responseTime": 1664373753052.126,
+            "securityDetails": {
+                "certificateId": 0,
+                "certificateTransparencyCompliance": "compliant",
+                "cipher": "AES_128_GCM",
+                "encryptedClientHello": false,
+                "issuer": "SSL.com RSA SSL subCA",
+                "keyExchange": "ECDHE_RSA",
+                "keyExchangeGroup": "X25519",
+                "protocol": "TLS 1.2",
+                "sanList": [
+                    "*.shopee.vn",
+                    "shopee.vn"
+                ],
+                "serverSignatureAlgorithm": 2052,
+                "signedCertificateTimestampList": [
+                    {
+                        "hashAlgorithm": "SHA-256",
+                        "logDescription": "DigiCert Nessie2022 Log",
+                        "logId": "51A3B0F5FD01799C566DB837788F0CA47ACC1B27CBF79E88429A0DFED48B05E5",
+                        "origin": "Embedded in certificate",
+                        "signatureAlgorithm": "ECDSA",
+                        "signatureData": "3045022100BE75C2FE175CA293A4E7E8A1C7D724A4D9B7C7CB37D7ED82C34661EBEF260C1202207725E7C51AFD1B5A348BECCEC763B4E2B9729384214A0F0A728B77E7A26EB5DB",
+                        "status": "Verified",
+                        "timestamp": 1633324027661.0
+                    },
+                    {
+                        "hashAlgorithm": "SHA-256",
+                        "logDescription": "Google 'Xenon2022' log",
+                        "logId": "46A555EB75FA912030B5A28969F4F37D112C4174BEFD49B885ABF2FC70FE6D47",
+                        "origin": "Embedded in certificate",
+                        "signatureAlgorithm": "ECDSA",
+                        "signatureData": "3046022100E85C93761D932D238890B064B0F19C7AAEC00162E251830810BAAF74C4FDA22D02210086B9A8C1B08BCF7C90601B7D475CBC3413B36F18AB5D0556F1B8F8C63D552379",
+                        "status": "Verified",
+                        "timestamp": 1633324027711.0
+                    },
+                    {
+                        "hashAlgorithm": "SHA-256",
+                        "logDescription": "Sectigo 'Mammoth' CT log",
+                        "logId": "6F5376AC31F03119D89900A45115FF77151C11D902C10029068DB2089A37D913",
+                        "origin": "Embedded in certificate",
+                        "signatureAlgorithm": "ECDSA",
+                        "signatureData": "3045022100F4D0AEEC0541B5F89A9E236D9F0E0C3EE905E7393EE2C4822BDBEA1164CF5D1D022018F1B9B836A1C674EBDC897D13835984E0FC4E37922ED7C5D243111F47D3790D",
+                        "status": "Verified",
+                        "timestamp": 1633324027709.0
+                    }
+                ],
+                "subjectName": "*.shopee.vn",
+                "validFrom": 1633323425,
+                "validTo": 1667537825
+            },
+            "securityState": "secure",
+            "status": 200,
+            "statusText": "",
+            "timing": {
+                "connectEnd": -1,
+                "connectStart": -1,
+                "dnsEnd": -1,
+                "dnsStart": -1,
+                "proxyEnd": -1,
+                "proxyStart": -1,
+                "pushEnd": 0,
+                "pushStart": 0,
+                "receiveHeadersEnd": 145.411,
+                "requestTime": 559542.303082,
+                "sendEnd": 0.431,
+                "sendStart": 0.195,
+                "sslEnd": -1,
+                "sslStart": -1,
+                "workerFetchStart": -1,
+                "workerReady": -1,
+                "workerRespondWithSettled": -1,
+                "workerStart": -1
+            },
+            "url": "https://shopee.vn/api/v4/search/search_items?by=relevancy&limit=60&match_id=11035570&newest=0&order=desc&page_type=search&scenario=PAGE_CATEGORY&version=2"
+        },
+        "timestamp": 559542.515469,
+        "type": "Fetch"
+    }
+}
