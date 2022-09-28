@@ -23,6 +23,7 @@ class Categories:
             paths.extend(ret)
         return paths
     def GetSpecificPath(self):
+        pass
         
 
 # categories = GetCategories("Categories.json")

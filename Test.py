@@ -5,25 +5,20 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
-from selenium.webdriver import ActionChains
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+from selenium.common.exceptions import TimeoutException
 import time
 from datetime import datetime
 import concurrent.futures
 from random_user_agent.user_agent import UserAgent
 from random_user_agent.params import SoftwareName, OperatingSystem
-from selenium_stealth import stealth
-import undetected_chromedriver as uc
-from selenium.webdriver.common.proxy import Proxy, ProxyType
-# from seleniumwire import webdriver
+from seleniumwire import webdriver
 from HelpTools.ReadCategories import Categories
+from TinProxyService import GetProxyIP
 
-def CheckExistsByXpath(driver, xpath):
-    try:
-        driver.find_element(By.XPATH, xpath)
-    except NoSuchElementException:
-        return False
-    return True
 
 def CreateService():
     service = Service(executable_path=ChromeDriverManager().install())
@@ -43,69 +38,51 @@ def CreateService():
     chromeOptions.add_argument('--disable-notifications')
     chromeOptions.add_experimental_option("excludeSwitches", ["enable-automation"])
     chromeOptions.add_experimental_option('useAutomationExtension', False)
-    # # Selenium wire (Du phong)
-    # hostname = "171.240.154.234"
-    # port = "4007"
-    # user = "XmkFifOG"
-    # passw = "VNjYCQHl"
-    # options = {
-    # 'proxy': {
-    #     'http': f'http://{user}:{passw}@{hostname}:{port}', 
-    #     'https': f'https://{user}:{passw}@{hostname}:{port}',
-    #     'no_proxy': 'localhost,127.0.0.1' # excludes
-    #     }
-    # }
     # Proxy
-    PROXY = "171.240.154.234:4007"
-    prox = Proxy()
-    prox.proxy_type = ProxyType.MANUAL
-    prox.auto_detect = False
-    prox.http_proxy = PROXY
-    prox.ssl_proxy = PROXY
-    prox.add_to_capabilities(caps)
-    # driver = webdriver.Chrome(desired_capabilities=caps,service = service, options=chromeOptions, seleniumwire_options=options)
-    driver = webdriver.Chrome(desired_capabilities=caps,service = service, options=chromeOptions)
+    result = GetProxyIP.GetProxyIps()
+    # result = {
+    #     "proxyIp": "116.109.19.55:10006",
+    #     "username": "tmABbQHD",
+    #     "password": "sQ0zgbj5"
+    # }
+    proxyIp = result["proxyIp"]
+    username = result["username"]
+    password = result["password"]
+    options = {
+        'disable_capture': True,
+        'proxy': {
+            'http': f'http://{username}:{password}@{proxyIp}', 
+            'https': f'https://{username}:{password}@{proxyIp}',
+            'no_proxy': 'localhost,127.0.0.1' # excludes
+            }
+    }
+    driver = webdriver.Chrome(desired_capabilities=caps,service = service, options=chromeOptions, seleniumwire_options=options)
     return driver
 
-def GetItems(url:str, page: int) -> dict:
+def GetItems(url:str, page: int, patient = 0) -> dict:
     
     def process_browser_log_entry(entry):
         response = json.loads(entry['message'])['message']
         return response
     items=[]
+    if patient >= 5:
+        print(f"Không vào được link sau {patient} lần tải lại!")
+        return items
     driver = CreateService()
     try:
+        time.sleep(3)
         driver.get(f"{url}?page={page}")
         time.sleep(10)
-        # Test Bypass
-        # try:
-        #     actions = ActionChains(driver)
-        #     sliderContainer = driver.find_element(By.XPATH, '//*[@id="main"]/div/div[2]/div/div/div/div/div[2]/div[2]/div[3]')
-        #     slider = driver.find_element(By.XPATH, '//*[@id="main"]/div/div[2]/div/div/div/div/div[2]/div[2]/div[3]/div/div/div')
-        #     for x in range(10000):
-        #         actions.move_to_element(slider).click_and_hold().move_by_offset(x, 0).release().perform()
-        #         time.sleep(0.1)
-        # except:
-        #     print("Sai đâu đó!")
-        # actions = ActionChains(driver)
-        # for x in range(10000):
-        #     # if not check_exists_by_xpath(driver, xpath='/html/body/div[1]/div/div[2]/div/div/div/div/div[2]/div[2]/div[3]/div/div/div'):
-        #     #     break
-        #     try:
-        #         slider = driver.find_element(By.XPATH, '/html/body/div[1]/div/div[2]/div/div/div/div/div[2]/div[2]/div[3]/div/div/div')
-        #         sliderContainer = driver.find_element(By.XPATH, '/html/body/div[1]/div/div[2]/div/div/div/div/div[2]/div[2]')
-        #         # actions.move_to_element(slider).click_and_hold().move_by_offset(sliderContainer.size['width'], 0).release().perform()
-        #         actions.move_to_element(slider).click_and_hold().move_by_offset(236, 0).release().perform()
-        #         time.sleep(0.5)
-        #     except:
-        #         continue
         browser_log = driver.get_log('performance') 
         events = [process_browser_log_entry(entry) for entry in browser_log]
         events = [event for event in events if 'Network.response' in event['method']]
-    except Exception() as e:
-        print("Không vào được links")
-        print(e)
-        return items
+    # except Exception() as e:
+    except:
+        driver.close()
+        print(f"###################Không vào được links page {page}. Tải lại...")
+        return GetItems(url, page, patient + 1)
+        # print(e)
+        # return items
     for i in range(len(events)):
         try:
             if  "https://shopee.vn/api/v4/search/search_items?by=relevancy" in events[i]["params"]["response"]["url"]:
@@ -160,10 +137,13 @@ def CrawlByCategory(url, pageQuantity: int, maxWorkers=8) -> list:
 
 if __name__=="__main__":
     # https://httpbin.org/ip
-    result = CrawlByCategory("https://httpbin.org/ip", '11035568', 1)
+    # result = CrawlByCategory("https://httpbin.org/ip", 16)
     categories = Categories("Categories.json")
     allPaths =categories.GetAllPaths()
-    
-    result = CrawlByCategory(allPaths[0], 8)
-    with open('data.json', 'w', encoding='utf-8') as f:
-        json.dump(result, f, ensure_ascii=False, indent=4)
+    # print(allPaths)
+    result = CrawlByCategory(allPaths[0], 32)
+    # print(result)
+    # with open('data.json', 'w', encoding='utf-8') as f:
+    #     json.dump(result, f, ensure_ascii=False, indent=4)
+    # print(GetProxyIP.LoadApiKeyAndAllowIp())
+    # print(GetProxyIP.GetProxyIps())
