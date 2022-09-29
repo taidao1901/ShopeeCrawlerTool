@@ -111,7 +111,7 @@ def GetProductsDetails(items: list,customerCategoryId: str) -> list:
                         'ProductURL': f"https://shopee.vn/product/{item['shopid']}/{item['itemid']}",
                         'CustomerCategoryId':customerCategoryId,
                         "SellerId":  item['catid'],
-                        # 'LabelIds': item['label_ids'],
+                        'LabelIds': item['label_ids'],
                         'Brand': item['brand'],
                         'Price': item['price'] if item['raw_discount'] == 0 else item['price_before_discount'],
                         'IsOfficialShop': item['is_official_shop'],
