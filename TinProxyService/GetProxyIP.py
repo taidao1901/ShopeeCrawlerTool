@@ -1,6 +1,7 @@
 import requests
 import random
 import time
+import pandas as pd
 
 def LoadApiKeyAndAllowIp():
     # Load api key list
@@ -14,12 +15,12 @@ def LoadApiKeyAndAllowIp():
 
 def GetProxyIps(count=0):
     if count >= 20:
-        print("Quá số lần request lấy proxy cho 1 request!")
-        return
+        print(f"Quá {count} lần request lấy proxy cho 1 request!")
+        return {"proxyIp":":", "username": "", "password":""}
     # Load info
     apiKey, lstAllowIp = LoadApiKeyAndAllowIp()
     # Check status apiKey
-    if not CheckRenewProxyPackage(apiKey=apiKey, renew=False):
+    if not CheckRenewProxyPackage(apiKey=apiKey, renew=True):
         return GetProxyIps(count + 1)
     strAllowIp = ",".join(lstAllowIp)
     # Request to get proxy ip
@@ -80,9 +81,10 @@ def CheckRenewProxyPackage(apiKey, renew=False, time_=1):
                         print(resultRenew["message"])
                         return True
                     else:
-                        print("Gia hạn thất bại. Kiểm tra đường truyền, website đăng ký.")
+                        print("#####\n#####Gia hạn thất bại. Kiểm tra đường truyền, website đăng ký.")
                         return False
                 else:
+                    print("Không chọn renew=True...")
                     return False
     print("API Key không tồn tại hoặc đã bị xóa!")
     return False

@@ -9,5 +9,6 @@ if __name__=="__main__":
     # r = requests.post(url=url, data=data)
     # result = r.json()
     # print(result, r.status_code)
-    print(selenium.__version__)
-    print(seleniumwire.__version__)
+    # print(selenium.__version__)
+    # print(seleniumwire.__version__)
+    pass

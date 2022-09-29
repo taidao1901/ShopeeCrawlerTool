@@ -4,12 +4,6 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
-from selenium.common.exceptions import TimeoutException
 import time
 from datetime import datetime
 import concurrent.futures
@@ -21,7 +15,9 @@ from TinProxyService import GetProxyIP
 import logging
 import pandas as pd 
 
-def CreateService():
+def CreateService(patient = 0):
+    if patient >= 5:
+        print("Lỗi IP! Create Service đã khởi chạy 5 lần.")
     service = Service(executable_path=ChromeDriverManager().install())
     caps = DesiredCapabilities.CHROME
     caps['goog:loggingPrefs'] = {'performance': 'ALL'}
@@ -41,12 +37,15 @@ def CreateService():
     chromeOptions.add_experimental_option('useAutomationExtension', False)
     # Proxy
     result = GetProxyIP.GetProxyIps()
+    print(result)
     # result = {
-    #     "proxyIp": "116.109.19.55:10006",
-    #     "username": "tmABbQHD",
-    #     "password": "sQ0zgbj5"
+    #     "proxyIp": "116.108.241.218:7001",
+    #     "username": "YTRHGBuR",
+    #     "password": "v5WXaTij"
     # }
     proxyIp = result["proxyIp"]
+    if proxyIp == ":":
+        return CreateService(patient + 1)
     username = result["username"]
     password = result["password"]
     options = {
@@ -61,7 +60,6 @@ def CreateService():
     return driver
 
 def GetItems(url:str, page: int, patient = 0) -> dict:
-
     def process_browser_log_entry(entry):
         response = json.loads(entry['message'])['message']
         return response
@@ -89,9 +87,12 @@ def GetItems(url:str, page: int, patient = 0) -> dict:
     # except Exception() as e:
     except:
         driver.close()
-        print(f"###################Không vào được links page {page}. Tải lại...")
+        print(f"Không vào được links page {page} lần {patient + 1}. Tải lại...")
         return GetItems(url, page, patient + 1)
 
+    print(f"####################\n######## Done {page}########\n####################")
+    if len(items) == 0:
+        print(page, items)
     driver.execute_script("window.stop();")
     return items, page
 
@@ -142,6 +143,7 @@ def CrawlByCategory(url, pageRange = (0,20), maxWorkers=8) -> list:
     log["CrawlTime"] = datetime.now()
     result = GetProductsDetails(items, customerCategoryId)
     return result,log
+
 def SaveLog(log,filePath =r"tmp\CrawlByCategory.csv"):
     logs = pd.read_csv(filePath)
     try:
@@ -150,6 +152,7 @@ def SaveLog(log,filePath =r"tmp\CrawlByCategory.csv"):
         pass
     logs = pd.concat([logs,pd.DataFrame([log])],ignore_index=True,axis=0)
     logs.to_csv(filePath, index= False)
+
 if __name__=="__main__":
     # https://httpbin.org/ip
     # result = CrawlByCategory("https://httpbin.org/ip", 16)
@@ -157,7 +160,7 @@ if __name__=="__main__":
     categories = Categories("Categories.json")
     allPaths =categories.GetAllPaths()
     # print(allPaths)
-    result,log = CrawlByCategory(allPaths[0], (0,1))
+    result,log = CrawlByCategory(allPaths[0], (0,20))
     SaveLog(log)
     # print(result)
     with open('data.json', 'w', encoding='utf-8') as f:
