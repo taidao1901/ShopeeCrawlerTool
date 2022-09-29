@@ -12,7 +12,6 @@ from random_user_agent.params import SoftwareName, OperatingSystem
 from seleniumwire import webdriver
 from HelpTools.ReadCategories import Categories
 from TinProxyService import GetProxyIP
-import logging
 import pandas as pd 
 
 def CreateService(patient = 0):
@@ -28,6 +27,7 @@ def CreateService(patient = 0):
     userAgent = userAgentRotator.get_random_user_agent()
     # Options
     chromeOptions = Options()
+    chromeOptions.add_argument('--headless')
     chromeOptions.add_argument(f'user-agent={userAgent}')
     chromeOptions.add_argument('--disable-blink-features=AutomationControlled')
     chromeOptions.add_argument("--incognito")
@@ -37,12 +37,11 @@ def CreateService(patient = 0):
     chromeOptions.add_experimental_option('useAutomationExtension', False)
     # Proxy
     result = GetProxyIP.GetProxyIps()
-    print(result)
-    # result = {
+    '''result = {
     #     "proxyIp": "116.108.241.218:7001",
     #     "username": "YTRHGBuR",
     #     "password": "v5WXaTij"
-    # }
+    # }'''
     proxyIp = result["proxyIp"]
     if proxyIp == ":":
         return CreateService(patient + 1)
@@ -64,39 +63,36 @@ def GetItems(url:str, page: int, patient = 0) -> dict:
         response = json.loads(entry['message'])['message']
         return response
     items=[]
-    if patient >= 5:
-        print(f"Không vào được link sau {patient} lần tải lại!")
-        return items
-    driver = CreateService()
-    try:
-        time.sleep(3)
-        driver.get(f"{url}?page={page}")
-        time.sleep(10)
-        browser_log = driver.get_log('performance')
-        for entry in browser_log:
-            event = process_browser_log_entry(entry)
-            try:
-                if  "https://shopee.vn/api/v4/search/search_items?by=relevancy" in event["params"]["response"]["url"]:
-                    response = driver.execute_cdp_cmd('Network.getResponseBody', {'requestId': event["params"]["requestId"]})
-                    items = (json.loads(response['body'])["items"])
-                    break
-            except:
-                pass
-        # events = [process_browser_log_entry(entry) for entry in browser_log]
-        # events = [event for event in events if 'Network.response' in event['method']]
-    # except Exception() as e:
-    except:
-        driver.close()
-        print(f"Không vào được links page {page} lần {patient + 1}. Tải lại...")
-        return GetItems(url, page, patient + 1)
-
-    print(f"####################\n######## Done {page}########\n####################")
-    if len(items) == 0:
-        print(page, items)
-    driver.execute_script("window.stop();")
+    if url is not None:
+        if patient >= 5:
+            print(f"Không vào được link sau {patient} lần tải lại!")
+            return items
+        driver = CreateService()
+        try:
+            driver.get(f"{url}?page={page}")
+            time.sleep(10)
+            browser_log = driver.get_log('performance')
+            for entry in browser_log:
+                event = process_browser_log_entry(entry)
+                try:
+                    if  "https://shopee.vn/api/v4/search/search_items?by=relevancy" in event["params"]["response"]["url"]:
+                        response = driver.execute_cdp_cmd('Network.getResponseBody', {'requestId': event["params"]["requestId"]})
+                        items = (json.loads(response['body'])["items"])
+                        break
+                except:
+                    pass
+        except:
+            driver.close()
+            print(f"Không vào được links page {page} lần {patient + 1}. Tải lại...")
+            return GetItems(url, page, patient + 1)
+            
+        # print(f"####################\n######## Done {page}########\n####################")
+        # if len(items) == 0:
+        #     print(page, items)
+        driver.execute_script("window.stop();")
     return items, page
 
-def GetProductsDetails(items: list,customerCategoryId: str) -> list:
+def GetProductsDetails(items: list, customerCategoryId: str) -> list:
     result = []
     if len(items)>0:
         for item in items:
@@ -110,8 +106,8 @@ def GetProductsDetails(items: list,customerCategoryId: str) -> list:
                         'Images': [f"https://cf.shopee.vn/file/{image}" for image in item['images']],
                         'ProductURL': f"https://shopee.vn/product/{item['shopid']}/{item['itemid']}",
                         'CustomerCategoryId':customerCategoryId,
-                        "SellerId":  item['catid'],
-                        'LabelIds': item['label_ids'],
+                        # "SellerId":  item['catid'],
+                        # 'LabelIds': item['label_ids'],
                         'Brand': item['brand'],
                         'Price': item['price'] if item['raw_discount'] == 0 else item['price_before_discount'],
                         'IsOfficialShop': item['is_official_shop'],
@@ -123,7 +119,7 @@ def GetProductsDetails(items: list,customerCategoryId: str) -> list:
                 pass
     return result
 
-def CrawlByCategory(url, pageRange = (0,20), maxWorkers=8) -> list:
+def CrawlByCategory(url, pageRange = (0,50), maxWorkers=8) -> list:
     futures =[]
     items = []
     pages = []
@@ -142,10 +138,10 @@ def CrawlByCategory(url, pageRange = (0,20), maxWorkers=8) -> list:
     log["PagesAreCrawled"] = pages
     log["CrawlTime"] = datetime.now()
     result = GetProductsDetails(items, customerCategoryId)
-    return result,log
+    return result, log
 
 def SaveLog(log,filePath =r"tmp\CrawlByCategory.csv"):
-    logs = pd.read_csv(filePath)
+    logs = pd.read_csv(logFilePath)
     try:
         logs= logs.drop(logs[logs.CategoryLink == log["CategoryLink"]].index)
     except: 
@@ -154,16 +150,23 @@ def SaveLog(log,filePath =r"tmp\CrawlByCategory.csv"):
     logs.to_csv(filePath, index= False)
 
 if __name__=="__main__":
-    # https://httpbin.org/ip
-    # result = CrawlByCategory("https://httpbin.org/ip", 16)
-    logging.basicConfig(filename=r'tmp\CrawlByCategory.log', filemode='a', format='%(name)s - %(levelname)s - %(message)s',datefmt='%H:%M:%S', level=logging.DEBUG)
+
+    logFilePath = r"tmp\CrawlByCategory.csv"
     categories = Categories("Categories.json")
     allPaths =categories.GetAllPaths()
-    # print(allPaths)
-    result,log = CrawlByCategory(allPaths[0], (0,20))
-    SaveLog(log)
-    # print(result)
-    with open('data.json', 'w', encoding='utf-8') as f:
-        json.dump(result, f, ensure_ascii=False, indent=4)
-    # print(GetProxyIP.LoadApiKeyAndAllowIp())
-    # print(GetProxyIP.GetProxyIps())
+    for index, path in enumerate(allPaths) :
+        print(path)
+        # print(allPaths)
+        # result,log = CrawlByCategory(path, (0,6))
+        # SaveLog(log)
+        # # print(result)
+        # with open('data.json', 'r+', encoding='utf-8') as f:
+        #     data = json.loads(f.read())
+        #     f.seek(0)
+        #     f.truncate()
+        #     data.extend(result)
+        #     json.dump(data, f, ensure_ascii=False, indent=4)
+        if index>1 :
+            break
+        # print(GetProxyIP.LoadApiKeyAndAllowIp())
+        # print(GetProxyIP.GetProxyIps())
