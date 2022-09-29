@@ -1,10 +1,8 @@
 import json
-from sqlite3 import Row
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -110,7 +108,7 @@ def GetProductsDetails(items: list,customerCategoryId: str) -> list:
                         'ProductURL': f"https://shopee.vn/product/{item['shopid']}/{item['itemid']}",
                         'CustomerCategoryId':customerCategoryId,
                         "SellerId":  item['catid'],
-                        'LabelIds': item['label_ids'],
+                        # 'LabelIds': item['label_ids'],
                         'Brand': item['brand'],
                         'Price': item['price'] if item['raw_discount'] == 0 else item['price_before_discount'],
                         'IsOfficialShop': item['is_official_shop'],
