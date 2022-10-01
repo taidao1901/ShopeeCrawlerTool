@@ -82,14 +82,14 @@ def GetItems(url:str, page: int, patient = 0) -> dict:
                 except:
                     pass
         except:
-            driver.close()
+            driver.quit()
             print(f"Không vào được links page {page} lần {patient + 1}. Tải lại...")
             return GetItems(url, page, patient + 1)
             
         # print(f"####################\n######## Done {page}########\n####################")
         # if len(items) == 0:
         #     print(page, items)
-        driver.execute_script("window.stop();")
+        driver.quit()
     return items, page
 
 def GetProductsDetails(items: list, customerCategoryId: str) -> list:
@@ -119,7 +119,7 @@ def GetProductsDetails(items: list, customerCategoryId: str) -> list:
                 pass
     return result
 
-def CrawlByCategory(url, pageRange = (0,50), maxWorkers=8) -> list:
+def CrawlByCategory(url, pageRange = (0,50), maxWorkers=12) -> list:
     futures =[]
     items = []
     pages = []
@@ -140,8 +140,8 @@ def CrawlByCategory(url, pageRange = (0,50), maxWorkers=8) -> list:
     result = GetProductsDetails(items, customerCategoryId)
     return result, log
 
-def SaveLog(log,filePath =r"tmp\CrawlByCategory.csv"):
-    logs = pd.read_csv(logFilePath)
+def SaveLog(log,filePath =r"tmp/CrawlByCategory.csv"):
+    logs = pd.read_csv(filePath)
     try:
         logs= logs.drop(logs[logs.CategoryLink == log["CategoryLink"]].index)
     except: 
@@ -151,22 +151,31 @@ def SaveLog(log,filePath =r"tmp\CrawlByCategory.csv"):
 
 if __name__=="__main__":
 
-    logFilePath = r"tmp\CrawlByCategory.csv"
+    logFilePath = r"tmp/CrawlByCategory.csv"
+    logPaths = pd.read_csv(logFilePath)
+    logPaths = logPaths['CategoryLink'].tolist()
+    # print(logPaths)
     categories = Categories("Categories.json")
     allPaths =categories.GetAllPaths()
     for index, path in enumerate(allPaths) :
-        print(path)
         # print(allPaths)
-        # result,log = CrawlByCategory(path, (0,6))
-        # SaveLog(log)
-        # # print(result)
-        # with open('data.json', 'r+', encoding='utf-8') as f:
-        #     data = json.loads(f.read())
-        #     f.seek(0)
-        #     f.truncate()
-        #     data.extend(result)
-        #     json.dump(data, f, ensure_ascii=False, indent=4)
-        if index>1 :
-            break
+        try:
+            if path not in logPaths:
+                print(path)
+                result,log = CrawlByCategory(path)
+                SaveLog(log)
+                # print(result)
+                with open('CoarseProductInfos.json', 'r+', encoding='utf-8') as f:
+                    data = json.loads(f.read())
+                    f.seek(0)
+                    f.truncate()
+                    data.extend(result)
+                    json.dump(data, f, ensure_ascii=False, indent=4)
+        except:
+            pass
+    # for path in allPaths:
+    #     if path not in logPaths:
+    #         print(path)
+
         # print(GetProxyIP.LoadApiKeyAndAllowIp())
         # print(GetProxyIP.GetProxyIps())

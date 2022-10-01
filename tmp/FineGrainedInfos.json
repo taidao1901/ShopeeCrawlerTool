@@ -1,0 +1,30 @@
+[
+    {
+        "CategoryLink":"https:\/\/shopee.vn\/Áo-Khoác-cat.11035567.11035568.11035570",
+        "IsCompelete":null,
+        "ProductQuantity":3,
+        "ProductsAreCrawled":"[13642055073, 11953602520, 14305548999]",
+        "CrawlTime":"2022-10-01 17:19:29.710235",
+        "IsComplete":0.0
+    },
+    {
+        "CategoryLink":"https:\/\/shopee.vn\/Áo-Hoodie-cat.11035567.11035578.11035579",
+        "IsCompelete":null,
+        "ProductQuantity":3,
+        "ProductsAreCrawled":"[15649705543, 12846907959, 11759160670]",
+        "CrawlTime":"2022-10-01 17:19:55.309361",
+        "IsComplete":0.0
+    },
+    {
+        "CategoryLink":"https:\/\/shopee.vn\/Áo-Nỉ-cat.11035567.11035578.11035580",
+        "IsCompelete":null,
+        "ProductQuantity":3,
+        "ProductsAreCrawled":[
+            14927727400,
+            20610056459,
+            7055292884
+        ],
+        "CrawlTime":1664644816202,
+        "IsComplete":0.0
+    }
+]
