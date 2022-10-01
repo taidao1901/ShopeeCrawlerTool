@@ -134,7 +134,7 @@ def CrawlFineGrainedByCategory(categoryProducts , categoryLink, maxWorkers= 12, 
                     ids.append(fineGrained["ItemId"])
         except:
             pass
-    log["IsComplete"] = 1 if len(result)>= 1500 else 0
+    log["IsComplete"] = 1 if len(result) >= 1500 else 0
     log["ProductQuantity"] = len(result)
     log["ProductsAreCrawled"] = ids
     log["CrawlTime"]= datetime.now()
@@ -160,10 +160,14 @@ if __name__=="__main__":
     #result =GetProductUrls("https://shopee.vn/Áo-Khoác-cat.11035567.11035568.11035570", coarseInfos)
     #result.to_json("CategoryProducs.json", indent=4,orient ="records", force_ascii = False)
     crawlByCategoryLog = pd.read_csv(r'tmp/CrawlByCategory.csv')
+    fineGrainedInfos = pd.read_csv(r'tmp/FineGrainedInfos.csv')
+    fineGrainedInfos  =fineGrainedInfos["CategoryLink"].tolist()
+
     for index, row in crawlByCategoryLog.iterrows():
-            if row["IsCompelete"] == 1:
+        try:
+            if row["IsCompelete"] == 1 and row['CategoryLink'] not in fineGrainedInfos:
                 categoryProducts = GetProductByCategory(categoryPath=row["CategoryLink"],coarseInfos=coarseInfos)
-                result, log = CrawlFineGrainedByCategory(categoryProducts,row["CategoryLink"], maxProducts= 3)
+                result, log = CrawlFineGrainedByCategory(categoryProducts,row["CategoryLink"])
                 SaveLog(log)
                 with open("FineGrainedProductInfos.json", "r+", encoding="utf-8") as f:
                     data= json.loads(f.read())
@@ -171,5 +175,5 @@ if __name__=="__main__":
                     f.truncate()
                     data.extend(result)
                     json.dump(data, f, ensure_ascii=False, indent=4)
-            if index >= 12 :
-                break
+        except:
+            pass
