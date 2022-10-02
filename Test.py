@@ -69,13 +69,13 @@ def GetItems(url:str, page: int, patient = 0) -> dict:
             return items
         driver = CreateService()
         try:
-            driver.get(f"{url}?page={page}")
+            driver.get(f"{url}?filters=5%2C7%2C6&page={page}&sortBy=pop")
             time.sleep(10)
             browser_log = driver.get_log('performance')
             for entry in browser_log:
                 event = process_browser_log_entry(entry)
                 try:
-                    if  "https://shopee.vn/api/v4/search/search_items?by=relevancy" in event["params"]["response"]["url"]:
+                    if  "https://shopee.vn/api/v4/search/search_items?by=pop&filters=5%2C7%2C6&limit=60&match_id" in event["params"]["response"]["url"]:
                         response = driver.execute_cdp_cmd('Network.getResponseBody', {'requestId': event["params"]["requestId"]})
                         items = (json.loads(response['body'])["items"])
                         break
@@ -96,7 +96,7 @@ def GetProductsDetails(items: list, customerCategoryId: str) -> list:
     result = []
     if len(items)>0:
         for item in items:
-            try:
+            # try:
                 item = item["item_basic"]
                 result.append(
                     {
@@ -111,12 +111,16 @@ def GetProductsDetails(items: list, customerCategoryId: str) -> list:
                         'Brand': item['brand'],
                         'Price': item['price'] if item['raw_discount'] == 0 else item['price_before_discount'],
                         'IsOfficialShop': item['is_official_shop'],
+                        "IsPreferredPlusShop": item["is_preferred_plus_seller"],
+                        "ShopeeVerified":item["shopee_verified"],
+                        "IsServiceByShopee": item["is_service_by_shopee"],
+                        "ItemRating" :item['item_rating']['rating_star'],
                         'FetchedTime': datetime.now().timestamp(),
                     }
                 )
-            except Exception as e:
-                # logger.error(e)
-                pass
+            # except Exception as e:
+            #     # logger.error(e)S
+            #     pass
     return result
 
 def CrawlByCategory(url, pageRange = (0,50), maxWorkers=12) -> list:
@@ -140,7 +144,7 @@ def CrawlByCategory(url, pageRange = (0,50), maxWorkers=12) -> list:
     result = GetProductsDetails(items, customerCategoryId)
     return result, log
 
-def SaveLog(log,filePath =r"tmp/CrawlByCategory.csv"):
+def SaveLog(log,filePath =r"tmp/CrawlByCategoryV2.csv"):
     logs = pd.read_csv(filePath)
     try:
         logs= logs.drop(logs[logs.CategoryLink == log["CategoryLink"]].index)
@@ -151,7 +155,7 @@ def SaveLog(log,filePath =r"tmp/CrawlByCategory.csv"):
 
 if __name__=="__main__":
 
-    logFilePath = r"tmp/CrawlByCategory.csv"
+    logFilePath = r"tmp/CrawlByCategoryV2.csv"
     logPaths = pd.read_csv(logFilePath)
     logPaths = logPaths['CategoryLink'].tolist()
     # print(logPaths)
@@ -165,7 +169,7 @@ if __name__=="__main__":
                 result,log = CrawlByCategory(path)
                 SaveLog(log)
                 # print(result)
-                with open('CoarseProductInfos.json', 'r+', encoding='utf-8') as f:
+                with open(r'ResultV2/CoarseProductInfosV2.json', 'r+', encoding='utf-8') as f:
                     data = json.loads(f.read())
                     f.seek(0)
                     f.truncate()
@@ -173,9 +177,3 @@ if __name__=="__main__":
                     json.dump(data, f, ensure_ascii=False, indent=4)
         except:
             pass
-    # for path in allPaths:
-    #     if path not in logPaths:
-    #         print(path)
-
-        # print(GetProxyIP.LoadApiKeyAndAllowIp())
-        # print(GetProxyIP.GetProxyIps())
