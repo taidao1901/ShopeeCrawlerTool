@@ -80,6 +80,8 @@ def GetProductData(url:str, patient = 0) -> dict:
                     if  "https://shopee.vn/api/v4/item/get?itemid" in event["params"]["response"]["url"]:
                         response = driver.execute_cdp_cmd('Network.getResponseBody', {'requestId': event["params"]["requestId"]})
                         data = (json.loads(response['body']))['data']
+                        if len(data)==0:
+                            continue
                         break
                 except:
                     pass
@@ -114,31 +116,47 @@ def GetProductByCategory(categoryPath, coarseInfos):
     categoryProducts = coarseInfos[coarseInfos["CustomerCategoryId"]==int(customerCategoryId)]
     categoryProducts = categoryProducts.sort_values(by=['IsOfficialShop'], ascending=False)
     return categoryProducts
-def CrawlFineGrainedByCategory(categoryProducts , categoryLink, maxWorkers= 12, maxProducts=0) ->list:
-    futures =[]
-    result = []
+def CrawlFineGrainedByCategory(categoryProducts , categoryLink, maxWorkers= 12, maxProducts=0, step =100) ->list:
     ids = []
     log = {"CategoryLink": categoryLink}
     if categoryProducts.shape[0]>0:
         if maxProducts != 0:
             categoryProducts= categoryProducts.head(maxProducts)
-        try:
-            with concurrent.futures.ThreadPoolExecutor(max_workers= maxWorkers) as executor:
-                for index, row in categoryProducts.iterrows():
-                    futures.append(executor.submit(GetProductData, row["ProductURL"]))
-            for future in concurrent.futures.as_completed(futures):
-                data = future.result()
-                if data is not None:
-                    fineGrained  = GetProductDetails(data)
-                    result.append(fineGrained)
-                    ids.append(fineGrained["ItemId"])
-        except:
-            pass
-    log["IsComplete"] = 1 if len(result) >= 1500 else 0
-    log["ProductQuantity"] = len(result)
+        productUrls = categoryProducts["ProductURL"].tolist()
+        lenProductUrls = len(productUrls)
+        print(lenProductUrls)
+        for start in range (0,lenProductUrls,step):
+            futures =[]
+            result = []
+            end = (start+step) if (start+step)< lenProductUrls else lenProductUrls
+            currentProductUrls= productUrls[start:end]
+            try:
+                with concurrent.futures.ThreadPoolExecutor(max_workers= maxWorkers) as executor:
+                    for productUrl in currentProductUrls:
+                        futures.append(executor.submit(GetProductData, productUrl))
+                for future in concurrent.futures.as_completed(futures):
+                    try:
+                        data = future.result()
+                        if data is not None:
+                            fineGrained  = GetProductDetails(data)
+                            if fineGrained is not None:
+                                result.append(fineGrained)
+                                ids.append(fineGrained["ItemId"])
+                    except:
+                        pass
+            except:
+                pass
+            with open('FineGrainedProductInfos.json', 'r+', encoding='utf-8') as f:
+                data = json.loads(f.read())
+                f.seek(0)
+                f.truncate()
+                data.extend(result)
+                json.dump(data, f, ensure_ascii=False, indent=4)
+    log["IsComplete"] = 1 if len(ids) >= 1500 else 0
+    log["ProductQuantity"] = len(ids)
     log["ProductsAreCrawled"] = ids
     log["CrawlTime"]= datetime.now()
-    return result, log
+    return log
 
 def SaveLog(log,csvfilePath =r"tmp/FineGrainedInfos.csv",jsonfilePath = r"tmp/FineGrainedInfos.json"):
     logs = pd.read_csv(csvfilePath)
@@ -165,15 +183,9 @@ if __name__=="__main__":
 
     for index, row in crawlByCategoryLog.iterrows():
         try:
-            if row["IsCompelete"] == 1 and row['CategoryLink'] not in fineGrainedInfos:
+            if row['CategoryLink'] not in fineGrainedInfos:
                 categoryProducts = GetProductByCategory(categoryPath=row["CategoryLink"],coarseInfos=coarseInfos)
-                result, log = CrawlFineGrainedByCategory(categoryProducts,row["CategoryLink"])
+                log = CrawlFineGrainedByCategory(categoryProducts,row["CategoryLink"])
                 SaveLog(log)
-                with open("FineGrainedProductInfos.json", "r+", encoding="utf-8") as f:
-                    data= json.loads(f.read())
-                    f.seek(0)
-                    f.truncate()
-                    data.extend(result)
-                    json.dump(data, f, ensure_ascii=False, indent=4)
         except:
             pass
