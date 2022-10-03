@@ -116,7 +116,7 @@ def GetProductByCategory(categoryPath, coarseInfos):
     categoryProducts = coarseInfos[coarseInfos["CustomerCategoryId"]==int(customerCategoryId)]
     categoryProducts = categoryProducts.sort_values(by=['IsOfficialShop'], ascending=False)
     return categoryProducts
-def CrawlFineGrainedByCategory(categoryProducts , categoryLink, maxWorkers= 12, maxProducts=0, step =100) ->list:
+def CrawlFineGrainedByCategory(categoryProducts , categoryLink,filePath, maxWorkers= 12, maxProducts=0, step =100) ->list:
     ids = []
     log = {"CategoryLink": categoryLink}
     if categoryProducts.shape[0]>0:
@@ -146,8 +146,10 @@ def CrawlFineGrainedByCategory(categoryProducts , categoryLink, maxWorkers= 12, 
                         pass
             except:
                 pass
-            with open('FineGrainedProductInfos.json', 'r+', encoding='utf-8') as f:
+            with open(filePath, 'r+', encoding='utf-8') as f:
                 data = json.loads(f.read())
+                if data is None:
+                    data=[]
                 f.seek(0)
                 f.truncate()
                 data.extend(result)
@@ -177,15 +179,21 @@ if __name__=="__main__":
     #print(coarseInfos.head())
     #result =GetProductUrls("https://shopee.vn/Áo-Khoác-cat.11035567.11035568.11035570", coarseInfos)
     #result.to_json("CategoryProducs.json", indent=4,orient ="records", force_ascii = False)
-    crawlByCategoryLog = pd.read_csv(r'tmp/CrawlByCategory.csv')
+    crawlByCategoryLog = pd.read_csv(r'tmp/CrawlByCategoryV2.csv')
+    crawlByCategoryLog = crawlByCategoryLog["CategoryLink"].tolist()
     fineGrainedInfos = pd.read_csv(r'tmp/FineGrainedInfos.csv')
     fineGrainedInfos  =fineGrainedInfos["CategoryLink"].tolist()
 
-    for index, row in crawlByCategoryLog.iterrows():
-        try:
-            if row['CategoryLink'] not in fineGrainedInfos:
-                categoryProducts = GetProductByCategory(categoryPath=row["CategoryLink"],coarseInfos=coarseInfos)
-                log = CrawlFineGrainedByCategory(categoryProducts,row["CategoryLink"])
+    for index in range (len(crawlByCategoryLog)):
+        # try:
+            if crawlByCategoryLog[index] not in fineGrainedInfos:
+                print(crawlByCategoryLog[index])
+                nameFile = crawlByCategoryLog[index].split('.')[-1]
+                resultfilePath=f"ResultV2/{nameFile}.json"
+                with open(resultfilePath, "w",encoding='utf-8') as f:
+                    json.dump([], f)
+                categoryProducts = GetProductByCategory(categoryPath=crawlByCategoryLog[index],coarseInfos=coarseInfos)
+                log = CrawlFineGrainedByCategory(categoryProducts,crawlByCategoryLog[index],filePath =resultfilePath)
                 SaveLog(log)
-        except:
-            pass
+        # except:
+        #     pass
