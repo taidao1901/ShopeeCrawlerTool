@@ -72,7 +72,7 @@ def GetProductData(url:str, patient = 0) -> dict:
         driver = CreateService()
         try:
             driver.get(f"{url}")
-            time.sleep(10)
+            time.sleep(5)
             browser_log = driver.get_log('performance')
             for entry in browser_log:
                 event = process_browser_log_entry(entry)
@@ -116,7 +116,7 @@ def GetProductByCategory(categoryPath, coarseInfos):
     categoryProducts = coarseInfos[coarseInfos["CustomerCategoryId"]==int(customerCategoryId)]
     categoryProducts = categoryProducts.sort_values(by=['IsOfficialShop'], ascending=False)
     return categoryProducts
-def CrawlFineGrainedByCategory(categoryProducts , categoryLink,filePath, maxWorkers= 12, maxProducts=0, step =100) ->list:
+def CrawlFineGrainedByCategory(categoryProducts , categoryLink,filePath, maxWorkers= 12, maxProducts=0, step =300) ->list:
     ids = []
     log = {"CategoryLink": categoryLink}
     if categoryProducts.shape[0]>0:
@@ -160,7 +160,7 @@ def CrawlFineGrainedByCategory(categoryProducts , categoryLink,filePath, maxWork
     log["CrawlTime"]= datetime.now()
     return log
 
-def SaveLog(log,csvfilePath =r"tmp/FineGrainedInfos.csv",jsonfilePath = r"tmp/FineGrainedInfos.json"):
+def SaveLog(log,csvfilePath =r"tmp/FineGrainedInfosV3.csv"):
     logs = pd.read_csv(csvfilePath)
     try:
         logs= logs.drop(logs[logs.CategoryLink == log["CategoryLink"]].index)
@@ -168,32 +168,36 @@ def SaveLog(log,csvfilePath =r"tmp/FineGrainedInfos.csv",jsonfilePath = r"tmp/Fi
         pass
     logs = pd.concat([logs,pd.DataFrame([log])],ignore_index=True,axis=0)
     logs.to_csv(csvfilePath, index= False)
-    logs.to_json(jsonfilePath, orient= "records", indent=4, force_ascii = False)
+    # logs.to_json(jsonfilePath, orient= "records", indent=4, force_ascii = False)
 
 if __name__=="__main__":
     # data = GetProductData("https://shopee.vn/Qu%E1%BA%A7n-Black-Funoff-Short-Biker-Short-D%C3%A1ng-Ng%E1%BA%AFn-N%E1%BB%AF-N%C3%A2ng-M%C3%B4ng-M%C3%B9a-H%C3%A8-N%C4%83ng-%C4%90%E1%BB%99ng-i.267034657.13454004194?sp_atk=49122a6b-ebd1-4888-ac3c-7b816271e6f9&xptdk=49122a6b-ebd1-4888-ac3c-7b816271e6f9")
     # details = GetProductsDetails(data)
     # with open('productdetail.json', 'w', encoding='utf-8') as f:
     #     json.dump(details, f, ensure_ascii=False, indent=4)
-    coarseInfos = pd.read_json("CoarseProductInfos.json")
+    coarseInfos = pd.read_json("ResultV3/CoarseProductInfosV3.json")
     #print(coarseInfos.head())
     #result =GetProductUrls("https://shopee.vn/Áo-Khoác-cat.11035567.11035568.11035570", coarseInfos)
     #result.to_json("CategoryProducs.json", indent=4,orient ="records", force_ascii = False)
-    crawlByCategoryLog = pd.read_csv(r'tmp/CrawlByCategoryV2.csv')
+    crawlByCategoryLog = pd.read_csv(r'tmp/CrawlByCategoryV3.csv')
     crawlByCategoryLog = crawlByCategoryLog["CategoryLink"].tolist()
     fineGrainedInfos = pd.read_csv(r'tmp/FineGrainedInfos.csv')
-    fineGrainedInfos  =fineGrainedInfos["CategoryLink"].tolist()
+    CategoriesAreCrawled  =fineGrainedInfos["CategoryLink"].tolist()
 
+    
+    fineGrainedInfosV3 = pd.read_csv(r'tmp/FineGrainedInfos.csv')
+    fineGrainedInfosV3  =fineGrainedInfosV3["CategoryLink"].tolist()
+    
     for index in range (len(crawlByCategoryLog)):
-        # try:
-            if crawlByCategoryLog[index] not in fineGrainedInfos:
+        try:
+            if crawlByCategoryLog[index] not in CategoriesAreCrawled:
                 print(crawlByCategoryLog[index])
                 nameFile = crawlByCategoryLog[index].split('.')[-1]
-                resultfilePath=f"ResultV2/{nameFile}.json"
+                resultfilePath=f"ResultV3/{nameFile}.json"
                 with open(resultfilePath, "w",encoding='utf-8') as f:
                     json.dump([], f)
                 categoryProducts = GetProductByCategory(categoryPath=crawlByCategoryLog[index],coarseInfos=coarseInfos)
                 log = CrawlFineGrainedByCategory(categoryProducts,crawlByCategoryLog[index],filePath =resultfilePath)
                 SaveLog(log)
-        # except:
-        #     pass
+        except:
+            pass
